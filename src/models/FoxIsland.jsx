@@ -6,12 +6,13 @@ Source: https://sketchfab.com/3d-models/foxs-islands-163b68e09fcc47618450150be77
 Title: Fox's islands
 */
 
-import * as THREE from 'three'
-import React, { useRef } from 'react'
+// import * as THREE from 'three'
+import React, { useEffect, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 // import { GLTF } from 'three-stdlib'
 import { a } from '@react-spring/three'
 import floatingIsland from '../assets/3D/foxs_islands.glb'
+import { useFrame, useThree } from '@react-three/fiber'
 
 // type GLTFResult = GLTF & {
 //     nodes: {
@@ -580,11 +581,164 @@ import floatingIsland from '../assets/3D/foxs_islands.glb'
 //     }
 // }
 
-const FoxIsland = (props) => {
+const FoxIsland = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const isLandRef = useRef();
+
     const { nodes, materials } = useGLTF(floatingIsland) // as GLTFResult
+    const { gl, viewport } = useThree();
+
+    const lastX = useRef(0);
+    const rotationRef = useRef(0);
+    const draggingFactor = 0.95;
+
+    const handlePointerDown = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setIsRotating(true);
+
+        const clientx = e.touches ? e.touches[0].clientX : e.clientX;
+        lastX.current = clientx;
+    }
+
+    const handlePointerUp = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setIsRotating(false);
+    }
+
+    const handlePointerMove = (e) => {
+        e.stopPropagation();
+        // event.preventDefault();
+        if (isRotating) {
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const delta = (clientX - lastX.current) / viewport.width;
+            isLandRef.current.rotation.y += delta * 0.01 * Math.PI;
+            lastX.current = clientX;
+            rotationRef.current = delta * 0.01 * Math.PI;
+        }
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'ArrowLeft') {
+            if (!isRotating) setIsRotating(true);
+            isLandRef.current.rotation.y += 0.005 * Math.PI;
+            rotationRef.current = 0.007;
+        }
+        else if (e.key === 'ArrowRight') {
+            if (!isRotating) setIsRotating(true);
+            isLandRef.current.rotation.y -= 0.005 * Math.PI;
+            rotationRef.current = -0.007;
+        }
+    }
+
+    // const handleWheel = (e) => {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     if (!isRotating) setIsRotating(true);
+    //     isLandRef.current.rotation.y += e.deltaY * 0.01;
+    // }
+
+    const handleKeyUp = (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            setIsRotating(false);
+        }
+    }
+
+    // Touch events for mobile devices
+    const handleTouchStart = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setIsRotating(true);
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        lastX.current = clientX;
+    }
+
+    const handleTouchEnd = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setIsRotating(false);
+    }
+
+    const handleTouchMove = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (isRotating) {
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const delta = (clientX - lastX.current) / viewport.width;
+
+            isLandRef.current.rotation.y += delta * 0.01 * Math.PI;
+            lastX.current = clientX;
+            rotationRef.current = delta * 0.01 * Math.PI;
+        }
+    }
+
+    useEffect(() => {
+        const canvas = gl.domElement;
+        canvas.addEventListener('pointerdown', handlePointerDown);
+        canvas.addEventListener('pointerup', handlePointerUp);
+        canvas.addEventListener('pointermove', handlePointerMove);
+        // document.addEventListener('wheel', handleWheel);
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+        canvas.addEventListener('touchstart', handleTouchStart);
+        canvas.addEventListener('touchend', handleTouchEnd);
+        canvas.addEventListener('touchmove', handleTouchMove);
+
+        return () => {
+            canvas.removeEventListener('pointerdown', handlePointerDown);
+            canvas.removeEventListener('pointerup', handlePointerUp);
+            canvas.removeEventListener('pointermove', handlePointerMove);
+            // document.removeEventListener('wheel', handleWheel);
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('keyup', handleKeyUp);
+            canvas.removeEventListener('touchstart', handleTouchStart);
+            canvas.removeEventListener('touchend', handleTouchEnd);
+            canvas.removeEventListener('touchmove', handleTouchMove);
+        }
+    }, [gl, handlePointerDown, handlePointerMove, handlePointerUp, handleKeyDown, handleKeyUp]);
+
+    useFrame(() => {
+        if (!isRotating) {
+            rotationRef.current *= draggingFactor;
+
+            if (Math.abs(rotationRef.current) < 0.001) {
+                rotationRef.current = 0;
+            }
+
+            isLandRef.current.rotation.y += rotationRef.current;
+        } else {
+            const rotation = isLandRef.current.rotation.y;
+
+            const normalizedRotation =
+                ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+
+            switch (true) {
+                case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
+                    setCurrentStage(4);
+                    break;
+                case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
+                    setCurrentStage(3);
+                    break;
+                case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
+                    setCurrentStage(2);
+                    break;
+                case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
+                    setCurrentStage(1);
+                    break;
+                default:
+                    setCurrentStage(null);
+            }
+        }
+    });
+
     return (
-        <a.group ref={isLandRef} {...props}>
+        <a.group ref={isLandRef} {...props}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerMove={handlePointerMove}
+        >
             <group name="Sketchfab_Scene">
                 <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
                     <group name="4729b91c48c4480d923b9bae1f2f2c99fbx" rotation={[Math.PI / 2, 0, 0]}>

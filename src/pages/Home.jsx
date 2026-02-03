@@ -1,8 +1,10 @@
-import { Suspense, useRef } from 'react'
+import { Suspense, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Loader from '../components/Loader'
 import FoxIsland from '../models/FoxIsland'
 import Sky from '../models/Sky'
+import Plane from '../models/Plane'
+import Bird from '../models/Bird'
 
 const Home = () => {
     return (
@@ -18,6 +20,8 @@ const Home = () => {
 
 function ModelHolder() {
     const islandRef = useRef(null);
+    const [isRotating, setIsRotating] = useState(false);
+    const [currentStage, setCurrentStage] = useState(1);
 
     const screenResp = () => {
         const scalePoint = window.innerWidth <= 768 ? 0.9 : 1;
@@ -26,9 +30,18 @@ function ModelHolder() {
         return [scalePoint, positionPoint, rotationPoint]
     }
 
+    const planeResp = () => {
+        const scalePoint = window.innerWidth <= 768 ? 1.5 : 3;
+        const positionPoint = window.innerWidth <= 768 ? [0, -1.5, 0] : [0, -4, -4];
+        // const rotationPoint = window.innerWidth <= 768 ? [0.1, 4.7, 0] : [0, 0, 0];
+        return [scalePoint, positionPoint]
+    }
+
     const [islandScale, islandPosition, islandRotation] = screenResp();
+    const [planeScale, planePosition] = planeResp();
+
     return (
-        <Canvas className='w-full h-screen bg-transparent'
+        <Canvas className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
             camera={{ near: 0.1, far: 1000 }}
         >
             <Suspense fallback={<Loader />}>
@@ -38,9 +51,12 @@ function ModelHolder() {
                 <spotLight position={[1.3, 1, 1]} intensity={1.9} /> */}
                 <hemisphereLight skyColor="#b1e1ff" groundColor={'#000000'} intensity={1} />
 
-                <Sky />
-
-                <FoxIsland scale={islandScale} position={islandPosition} rotation={islandRotation} islandRef={islandRef} />
+                <Bird />
+                <Sky isRotating={isRotating} />
+                <FoxIsland scale={islandScale} position={islandPosition} rotation={islandRotation} islandRef={islandRef}
+                    isRotating={isRotating} setIsRotating={setIsRotating} setCurrentStage={setCurrentStage}
+                />
+                <Plane scale={planeScale} position={planePosition} />
             </Suspense>
         </Canvas>
     )
