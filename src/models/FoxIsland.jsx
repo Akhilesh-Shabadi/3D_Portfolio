@@ -11,8 +11,8 @@ import React, { useEffect, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 // import { GLTF } from 'three-stdlib'
 import { a } from '@react-spring/three'
-import floatingIsland from '../assets/3D/foxs_islands.glb'
 import { useFrame, useThree } from '@react-three/fiber'
+import floatingIsland from '../assets/3D/foxs_islands.glb'
 
 // type GLTFResult = GLTF & {
 //     nodes: {

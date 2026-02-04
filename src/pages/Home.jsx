@@ -5,35 +5,35 @@ import FoxIsland from '../models/FoxIsland'
 import Sky from '../models/Sky'
 import Plane from '../models/Plane'
 import Bird from '../models/Bird'
+import HomeInfoPopUp from '../components/HomeInfoPopUp'
 
 const Home = () => {
+    const [currentStage, setCurrentStage] = useState(1);
     return (
         <section className='w-full h-screen relative flex justify-center items-center'>
-            {/* <div className='absolute top-20 left-0 right-0 z-10 flex flex-col items-center justify-center'>
-                <p className='text-xl font-medium text-gray-500'>Hi, I'm</p>
-                <h1 className='text-5xl font-bold text-gray-900'>Alex</h1>
-            </div> */}
-            <ModelHolder />
+            <div className='absolute top-23 left-0 right-0 z-10 flex items-center justify-center'>
+                {currentStage && <HomeInfoPopUp currentStage={currentStage} />}
+            </div>
+            <ModelHolder currentStage={currentStage} setCurrentStage={setCurrentStage} />
         </section>
     )
 }
 
-function ModelHolder() {
+function ModelHolder({ currentStage, setCurrentStage }) {
     const islandRef = useRef(null);
     const [isRotating, setIsRotating] = useState(false);
-    const [currentStage, setCurrentStage] = useState(1);
     const rotationSpeed = useRef(0);
 
     const screenResp = () => {
         const scalePoint = window.innerWidth <= 768 ? 0.9 : 1;
-        const positionPoint = [-0.6, -5.8, -43];
+        const positionPoint = [-0.6, -6.9, -43];
         const rotationPoint = [0.1, 4.7, 0];
         return [scalePoint, positionPoint, rotationPoint]
     }
 
     const planeResp = () => {
         const scalePoint = window.innerWidth <= 768 ? 1.5 : 3;
-        const positionPoint = window.innerWidth <= 768 ? [0, -1.5, 0] : [0, -4, -4];
+        const positionPoint = window.innerWidth <= 768 ? [0, -2.5, 0] : [0, -4, -4];
         // const rotationPoint = window.innerWidth <= 768 ? [0.1, 4.7, 0] : [0, 0, 0];
         return [scalePoint, positionPoint]
     }
