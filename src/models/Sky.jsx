@@ -3,15 +3,22 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 import skyScene from '../assets/3D/sky.glb'
 
-const Sky = ({ isRotating }) => {
-    const skyRef = useRef();
+const Sky = ({ isRotating, rotationSpeed }) => {
+    const skyRef = useRef(null);
     const sky = useGLTF(skyScene);
 
     useFrame((_, delta) => {
         if (isRotating) {
-            skyRef.current.rotation.y += 0.15 * delta;
-        } else
-            skyRef.current.rotation.y += 0.001;
+            //     skyRef.current.rotation.y += 0.15 * delta;
+
+            if (rotationSpeed.current > 0.001) {
+                skyRef.current.rotation.y -= 0.15 * delta;
+            } else if (rotationSpeed.current < -0.001) {
+                skyRef.current.rotation.y += 0.15 * delta;
+            }
+        }
+        //  else
+        // skyRef.current.rotation.y += 0.001;
     })
     return (
         <mesh ref={skyRef}>

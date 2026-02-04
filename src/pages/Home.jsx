@@ -53,7 +53,7 @@ function ModelHolder() {
                 <hemisphereLight skyColor="#b1e1ff" groundColor={'#000000'} intensity={1} />
 
                 <Bird />
-                <Sky isRotating={isRotating} />
+                <Sky isRotating={isRotating} rotationSpeed={rotationSpeed} />
                 <FoxIsland scale={islandScale} position={islandPosition} rotation={islandRotation} islandRef={islandRef}
                     isRotating={isRotating} setIsRotating={setIsRotating} setCurrentStage={setCurrentStage} rotationSpeed={rotationSpeed}
                 />
