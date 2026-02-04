@@ -700,6 +700,10 @@ const FoxIsland = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => 
     }, [gl, handlePointerDown, handlePointerMove, handlePointerUp, handleKeyDown, handleKeyUp]);
 
     useFrame(() => {
+        if (props.rotationSpeed) {
+            props.rotationSpeed.current = rotationRef.current;
+        }
+
         if (!isRotating) {
             rotationRef.current *= draggingFactor;
 

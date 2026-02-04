@@ -22,6 +22,7 @@ function ModelHolder() {
     const islandRef = useRef(null);
     const [isRotating, setIsRotating] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
+    const rotationSpeed = useRef(0);
 
     const screenResp = () => {
         const scalePoint = window.innerWidth <= 768 ? 0.9 : 1;
@@ -54,9 +55,9 @@ function ModelHolder() {
                 <Bird />
                 <Sky isRotating={isRotating} />
                 <FoxIsland scale={islandScale} position={islandPosition} rotation={islandRotation} islandRef={islandRef}
-                    isRotating={isRotating} setIsRotating={setIsRotating} setCurrentStage={setCurrentStage}
+                    isRotating={isRotating} setIsRotating={setIsRotating} setCurrentStage={setCurrentStage} rotationSpeed={rotationSpeed}
                 />
-                <Plane scale={planeScale} position={planePosition} />
+                <Plane scale={planeScale} position={planePosition} isRotating={isRotating} rotationSpeed={rotationSpeed} />
             </Suspense>
         </Canvas>
     )
