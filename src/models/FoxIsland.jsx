@@ -5607,6 +5607,4 @@ const FoxIsland = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => 
     )
 }
 
-useGLTF.preload('/foxs_islands.glb')
-
 export default FoxIsland
