@@ -120,7 +120,7 @@ body:has(.card[data-color="green"]:hover) {
   box-shadow: 0px 10px 35px -4px rgba(67, 83, 255, 0.15),
     0px 1.5px 4px -1px rgba(67, 83, 255, 0.2);
 }
-
+ */
 .block-container {
   position: relative;
   transition: 250ms;
@@ -190,7 +190,7 @@ body:has(.card[data-color="green"]:hover) {
 
 .block-container:hover>.btn-front {
   transform: translateZ(80px) translateY(-5px) rotateX(15deg) rotateY(15deg);
-} */
+}
 
 /* Neo Brutalism */
 /* .neo-brutalism-blue {
