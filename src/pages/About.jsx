@@ -17,7 +17,7 @@ const About = () => {
             <div className='py-10 flex flex-col'>
                 <h3 className='font-semibold sm:text-3xl text-xl relative font-poppins'>My Skills</h3>
 
-                <div className='mt-16 flex flex-wrap gap-12'>
+                <div className='mt-16 flex flex-wrap gap-12 justify-center'>
                     {skills.map((skill, index) => (
                         <div className='block-container w-20 h-20' key={skill.name}>
                             <div className='btn-back rounded-xl bg-white/20' />
@@ -37,7 +37,7 @@ const About = () => {
                 <h3 className='font-semibold sm:text-3xl text-xl relative font-poppins'>Work Experience</h3>
                 <div className='mt-5 flex flex-col gap-3 text-slate-500'>
                     <p>
-                        I've worked with all sorts of companies, leveling up my skills and teaming up with smart people. Here's the rundown:
+                        I've started my journey as a software engineer in 2024, leveling up my skills and teaming up with smart people. Here's the rundown:
                     </p>
                 </div>
 
@@ -47,11 +47,7 @@ const About = () => {
                             <div className='flex flex-col items-center'>
                                 <div className='w-12 h-12 rounded-full flex justify-center items-center' style={{ backgroundColor: experience.iconBg }}>
                                     {experience.icon ? (
-                                        <img
-                                            src={experience.icon}
-                                            alt={experience.company_name}
-                                            className='w-[60%] h-[60%] object-contain'
-                                        />
+                                        <img src={experience.icon} alt={experience.company_name} className='w-[60%] h-[60%] object-contain' />
                                     ) : <div className="w-2 h-2 rounded-full bg-white" />}
                                 </div>
                                 <div className='w-0.5 h-full bg-slate-200 my-2' />

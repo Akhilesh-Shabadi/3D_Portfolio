@@ -1,4 +1,4 @@
-import { css, express, git, github, html, javascript, nextjs, nodejs, react, redux, tailwindcss } from '../assets/icons'
+import { contact, css, express, git, github, html, javascript, nextjs, nodejs, react, redux, tailwindcss, linkedin } from '../assets/icons'
 
 
 export const skills = [
@@ -61,11 +61,11 @@ export const skills = [
 
 export const experiences = [
     {
-        title: "React.js Developer",
-        company_name: "Starbucks",
+        title: "Junior Developer",
+        company_name: "C TECH SERVICES",
         icon: null,
         iconBg: "#accbe1",
-        date: "March 2020 - April 2021",
+        date: "September 2024 - Present",
         points: [
             "Developing and maintaining web applications using React.js and other related technologies.",
             "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -73,61 +73,61 @@ export const experiences = [
             "Participating in code reviews and providing constructive feedback to other developers.",
         ],
     },
-    {
-        title: "React Native Developer",
-        company_name: "Tesla",
-        icon: null,
-        iconBg: "#fbc3bc",
-        date: "Jan 2021 - Feb 2022",
-        points: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Web Developer",
-        company_name: "Shopify",
-        icon: null,
-        iconBg: "#b7e4c7",
-        date: "Jan 2022 - Jan 2023",
-        points: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Full stack Developer",
-        company_name: "Meta",
-        icon: null,
-        iconBg: "#a2d2ff",
-        date: "Jan 2023 - Present",
-        points: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
+    // {
+    //     title: "React Native Developer",
+    //     company_name: "Tesla",
+    //     icon: null,
+    //     iconBg: "#fbc3bc",
+    //     date: "Jan 2021 - Feb 2022",
+    //     points: [
+    //         "Developing and maintaining web applications using React.js and other related technologies.",
+    //         "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+    //         "Implementing responsive design and ensuring cross-browser compatibility.",
+    //         "Participating in code reviews and providing constructive feedback to other developers.",
+    //     ],
+    // },
+    // {
+    //     title: "Web Developer",
+    //     company_name: "Shopify",
+    //     icon: null,
+    //     iconBg: "#b7e4c7",
+    //     date: "Jan 2022 - Jan 2023",
+    //     points: [
+    //         "Developing and maintaining web applications using React.js and other related technologies.",
+    //         "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+    //         "Implementing responsive design and ensuring cross-browser compatibility.",
+    //         "Participating in code reviews and providing constructive feedback to other developers.",
+    //     ],
+    // },
+    // {
+    //     title: "Full stack Developer",
+    //     company_name: "Meta",
+    //     icon: null,
+    //     iconBg: "#a2d2ff",
+    //     date: "Jan 2023 - Present",
+    //     points: [
+    //         "Developing and maintaining web applications using React.js and other related technologies.",
+    //         "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+    //         "Implementing responsive design and ensuring cross-browser compatibility.",
+    //         "Participating in code reviews and providing constructive feedback to other developers.",
+    //     ],
+    // },
 ];
 
 export const socialLinks = [
     {
         name: 'Contact',
-        iconUrl: null,
+        iconUrl: contact,
         link: '/contact',
     },
     {
         name: 'GitHub',
-        iconUrl: null,
-        link: 'https://github.com/YourGitHubUsername',
+        iconUrl: github,
+        link: 'https://github.com/Akhilesh-Shabadi',
     },
     {
         name: 'LinkedIn',
-        iconUrl: null,
-        link: 'https://www.linkedin.com/in/YourLinkedInUsername',
+        iconUrl: linkedin,
+        link: 'https://www.linkedin.com/in/akhilesh-shabadi',
     }
 ];

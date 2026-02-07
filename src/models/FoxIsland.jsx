@@ -622,12 +622,12 @@ const FoxIsland = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => 
         if (e.key === 'ArrowLeft') {
             if (!isRotating) setIsRotating(true);
             isLandRef.current.rotation.y += 0.005 * Math.PI;
-            rotationRef.current = 0.007;
+            rotationRef.current = 0.0125;
         }
         else if (e.key === 'ArrowRight') {
             if (!isRotating) setIsRotating(true);
             isLandRef.current.rotation.y -= 0.005 * Math.PI;
-            rotationRef.current = -0.007;
+            rotationRef.current = -0.0125;
         }
     }
 
