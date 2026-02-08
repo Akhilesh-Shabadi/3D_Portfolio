@@ -27,7 +27,7 @@ const Plane = ({ isRotating, rotationSpeed, ...props }) => {
         const action = actions['Take 001'];
         action.play();
         // You can adjust timeScale to speed up the propeller when moving
-        action.timeScale = isRotating ? 1.5 : 0.5;
+        action.timeScale = isRotating ? 2 : 0.7;
     }, [isRotating]);
 
     useFrame((state, delta) => {
@@ -47,11 +47,11 @@ const Plane = ({ isRotating, rotationSpeed, ...props }) => {
         ref.current.rotation.y = THREE.MathUtils.lerp(
             ref.current.rotation.y,
             targetRotation,
-            3 * delta // Adjust '4' to make the turn faster or slower
+            2 * delta // Adjust '4' to make the turn faster or slower
         );
 
         // Add a slight tilt (roll) based on speed
-        const targetRotation1 = isRotating ? rotationSpeed.current * 25 : 0;
+        const targetRotation1 = isRotating ? rotationSpeed.current * 26 : 0;
         // Clamp the rotation to -45 to 45 degrees (approx -0.8 to 0.8 radians) to prevent flipping
         const clampedRotation = THREE.MathUtils.clamp(targetRotation1, -0.8, 0.8);
 
@@ -63,7 +63,7 @@ const Plane = ({ isRotating, rotationSpeed, ...props }) => {
     });
 
     return (
-        <mesh {...props} ref={ref} rotation={[0, 1.35, 0]}>
+        <mesh {...props} ref={ref} rotation={[0, 20.1, 0]}>
             <primitive object={scene} />
         </mesh>
     )

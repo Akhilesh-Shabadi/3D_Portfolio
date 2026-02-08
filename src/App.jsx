@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home, About, Projects, Contact, NotFound } from "./pages";
 import NavBar from "./components/NavBar";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -11,10 +12,19 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/*"
+              element={
+                <>
+                  <Routes>
+                    <Route path="/about" element={<About />} />
+                    <Route path="/projects" element={<Projects />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                  <Footer />
+                </>
+              }
+            />
           </Routes>
         </Router>
       </ErrorBoundary>
