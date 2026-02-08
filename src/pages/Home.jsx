@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState } from 'react'
+import { memo, Suspense, useMemo, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Loader from '../components/Loader'
 import FoxIsland from '../models/FoxIsland'
@@ -7,39 +7,49 @@ import Plane from '../models/Plane'
 import Bird from '../models/Bird'
 import HomeInfoPopUp from '../components/HomeInfoPopUp'
 
-const Home = () => {
-    const [currentStage, setCurrentStage] = useState(1);
-    return (
-        <section className='w-full h-screen relative flex justify-center items-center'>
-            <div className='absolute top-23 left-0 right-0 z-10 flex items-center justify-center'>
-                {currentStage && <HomeInfoPopUp currentStage={currentStage} />}
-            </div>
-            <ModelHolder currentStage={currentStage} setCurrentStage={setCurrentStage} />
-        </section>
-    )
-}
+// Move these outside the component so they are static
+const getIslandConfigs = (width) => {
+    const isMobile = width <= 768;
+    return [
+        isMobile ? 0.9 : 1,
+        [-0.6, -6.9, -43],
+        [0.1, 4.7, 0]
+    ];
+};
 
-function ModelHolder({ currentStage, setCurrentStage }) {
+const getPlaneConfigs = (width) => {
+    const isMobile = width <= 768;
+    return [
+        isMobile ? 1.5 : 3,
+        isMobile ? [0, -2.5, 0] : [0, -4, -4]
+    ];
+};
+
+const ModelHolder = memo(({ setCurrentStage }) => {
     const islandRef = useRef(null);
     const [isRotating, setIsRotating] = useState(false);
     const rotationSpeed = useRef(0);
 
-    const screenResp = () => {
-        const scalePoint = window.innerWidth <= 768 ? 0.9 : 1;
-        const positionPoint = [-0.6, -6.9, -43];
-        const rotationPoint = [0.1, 4.7, 0];
-        return [scalePoint, positionPoint, rotationPoint]
-    }
+    // const screenResp = () => {
+    //     const scalePoint = window.innerWidth <= 768 ? 0.9 : 1;
+    //     const positionPoint = [-0.6, -6.9, -43];
+    //     const rotationPoint = [0.1, 4.7, 0];
+    //     return [scalePoint, positionPoint, rotationPoint]
+    // }
 
-    const planeResp = () => {
-        const scalePoint = window.innerWidth <= 768 ? 1.5 : 3;
-        const positionPoint = window.innerWidth <= 768 ? [0, -2.5, 0] : [0, -4, -4];
-        // const rotationPoint = window.innerWidth <= 768 ? [0.1, 4.7, 0] : [0, 0, 0];
-        return [scalePoint, positionPoint]
-    }
+    // const planeResp = () => {
+    //     const scalePoint = window.innerWidth <= 768 ? 1.5 : 3;
+    //     const positionPoint = window.innerWidth <= 768 ? [0, -2.5, 0] : [0, -4, -4];
+    //     // const rotationPoint = window.innerWidth <= 768 ? [0.1, 4.7, 0] : [0, 0, 0];
+    //     return [scalePoint, positionPoint]
+    // }
 
-    const [islandScale, islandPosition, islandRotation] = screenResp();
-    const [planeScale, planePosition] = planeResp();
+    // Inside ModelHolder, memoize the values
+    const islandConfigs = useMemo(() => getIslandConfigs(window.innerWidth), []);
+    const planeConfigs = useMemo(() => getPlaneConfigs(window.innerWidth), []);
+
+    const [islandScale, islandPosition, islandRotation] = islandConfigs;
+    const [planeScale, planePosition] = planeConfigs;
 
     return (
         <Canvas className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
@@ -61,6 +71,19 @@ function ModelHolder({ currentStage, setCurrentStage }) {
             </Suspense>
         </Canvas>
     )
-}
+})
+
+
+const Home = memo(() => {
+    const [currentStage, setCurrentStage] = useState(1);
+    return (
+        <section className='w-full h-screen relative flex justify-center items-center'>
+            <div className='absolute top-23 left-0 right-0 z-10 flex items-center justify-center'>
+                {currentStage && <HomeInfoPopUp currentStage={currentStage} />}
+            </div>
+            <ModelHolder currentStage={currentStage} setCurrentStage={setCurrentStage} />
+        </section>
+    )
+})
 
 export default Home

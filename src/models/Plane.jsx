@@ -47,13 +47,17 @@ const Plane = ({ isRotating, rotationSpeed, ...props }) => {
         ref.current.rotation.y = THREE.MathUtils.lerp(
             ref.current.rotation.y,
             targetRotation,
-            4 * delta // Adjust '4' to make the turn faster or slower
+            3 * delta // Adjust '4' to make the turn faster or slower
         );
 
         // Add a slight tilt (roll) based on speed
+        const targetRotation1 = isRotating ? rotationSpeed.current * 25 : 0;
+        // Clamp the rotation to -45 to 45 degrees (approx -0.8 to 0.8 radians) to prevent flipping
+        const clampedRotation = THREE.MathUtils.clamp(targetRotation1, -0.8, 0.8);
+
         ref.current.rotation.z = THREE.MathUtils.lerp(
             ref.current.rotation.z,
-            isRotating ? rotationSpeed.current * 2.5 : 0,
+            clampedRotation,
             2 * delta
         );
     });

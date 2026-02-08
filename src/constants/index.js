@@ -131,3 +131,48 @@ export const socialLinks = [
         link: 'https://www.linkedin.com/in/akhilesh-shabadi',
     }
 ];
+
+export const projects = [
+    {
+        iconUrl: git,
+        theme: 'btn-back-red',
+        name: 'Amazon Price Tracker',
+        description: 'Developed a web application that tracks and notifies users of price changes for products on Amazon, helping users find the best deals.',
+        link: 'https://github.com/adrianhajdin/pricewise',
+    },
+    {
+        iconUrl: github,
+        theme: 'btn-back-green',
+        name: 'Full Stack Threads Clone',
+        description: 'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
+        link: 'https://github.com/adrianhajdin/threads',
+    },
+    {
+        iconUrl: nextjs,
+        theme: 'btn-back-blue',
+        name: 'Car Finding App',
+        description: 'Designed and built a mobile app for finding and comparing cars on the market, streamlining the car-buying process.',
+        link: 'https://github.com/adrianhajdin/project_next13_car_showcase',
+    },
+    {
+        iconUrl: react,
+        theme: 'btn-back-pink',
+        name: 'Snapgram',
+        description: 'Built a complete clone of Instagram, allowing users to share photos and connect with friends in a familiar social media environment.',
+        link: 'https://github.com/adrianhajdin/social_media_app',
+    },
+    {
+        iconUrl: nodejs,
+        theme: 'btn-back-black',
+        name: 'Real-Estate Application',
+        description: 'Developed a real-estate application that facilitates property listings and searches, connecting buyers with available properties.',
+        link: 'https://github.com/adrianhajdin/projects_realestate',
+    },
+    {
+        iconUrl: javascript,
+        theme: 'btn-back-yellow',
+        name: 'AI Summarizer Application',
+        description: 'App that leverages AI to automatically generate concise summaries of long text content using OpenAI GPT-4.',
+        link: 'https://github.com/adrianhajdin/project_ai_summarizer',
+    }
+];

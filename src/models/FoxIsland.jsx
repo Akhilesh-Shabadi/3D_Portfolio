@@ -7,9 +7,9 @@ Title: Fox's islands
 */
 
 // import * as THREE from 'three'
-import React, { useEffect, useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
 // import { GLTF } from 'three-stdlib'
+import { memo, useEffect, useRef } from 'react'
+import { useGLTF } from '@react-three/drei'
 import { a } from '@react-spring/three'
 import { useFrame, useThree } from '@react-three/fiber'
 import floatingIsland from '../assets/3D/foxs_islands.glb'
@@ -581,7 +581,7 @@ import floatingIsland from '../assets/3D/foxs_islands.glb'
 //     }
 // }
 
-const FoxIsland = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
+const FoxIsland = memo(({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const isLandRef = useRef();
 
     const { nodes, materials } = useGLTF(floatingIsland) // as GLTFResult
@@ -5605,6 +5605,6 @@ const FoxIsland = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => 
             </group>
         </a.group>
     )
-}
+})
 
 export default FoxIsland
