@@ -1,16 +1,34 @@
-import { contact, css, express, git, github, html, javascript, nextjs, nodejs, react, redux, tailwindcss, linkedin } from '../assets/icons'
+import {
+    contact, css, express, git, github, html, javascript, nextjs, nodejs, react, redux, tailwindcss, linkedin,
+    java, springBoot, oracleSql, mySql, msSql
+} from '../assets/icons'
 
 
 export const skills = [
+    {
+        imageUrl: html,
+        name: "HTML",
+        type: "Frontend",
+    },
     {
         imageUrl: css,
         name: "CSS",
         type: "Frontend",
     },
     {
-        imageUrl: express,
-        name: "Express",
-        type: "Backend",
+        imageUrl: javascript,
+        name: "JavaScript",
+        type: "Frontend",
+    },
+    {
+        imageUrl: java,
+        name: "JAVA",
+        type: "Backend"
+    },
+    {
+        imageUrl: springBoot,
+        name: "SPRING BOOT",
+        type: "Backend"
     },
     {
         imageUrl: git,
@@ -23,26 +41,6 @@ export const skills = [
         type: "Version Control",
     },
     {
-        imageUrl: html,
-        name: "HTML",
-        type: "Frontend",
-    },
-    {
-        imageUrl: javascript,
-        name: "JavaScript",
-        type: "Frontend",
-    },
-    {
-        imageUrl: nextjs,
-        name: "Next.js",
-        type: "Frontend",
-    },
-    {
-        imageUrl: nodejs,
-        name: "Node.js",
-        type: "Backend",
-    },
-    {
         imageUrl: react,
         name: "React",
         type: "Frontend",
@@ -53,10 +51,40 @@ export const skills = [
         type: "State Management",
     },
     {
+        imageUrl: nodejs,
+        name: "Node.js",
+        type: "Backend",
+    },
+    {
+        imageUrl: express,
+        name: "Express",
+        type: "Backend",
+    },
+    {
         imageUrl: tailwindcss,
         name: "Tailwind CSS",
         type: "Frontend",
-    }
+    },
+    {
+        imageUrl: nextjs,
+        name: "Next.js",
+        type: "Frontend",
+    },
+    {
+        imageUrl: oracleSql,
+        name: "Oracle SQL",
+        type: "DataBase",
+    },
+    {
+        imageUrl: mySql,
+        name: "MySQL",
+        type: "DataBase",
+    },
+    {
+        imageUrl: msSql,
+        name: "Microsoft SQL Server",
+        type: "DataBase",
+    },
 ];
 
 export const experiences = [

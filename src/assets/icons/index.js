@@ -12,6 +12,11 @@ import tailwindcss from './tailwindcss.svg'
 import linkedin from './linkedin.svg'
 import twitter from './twitter.svg'
 import contact from './contact.svg'
+import java from './java.svg'
+import springBoot from './spring.svg'
+import oracleSql from './sql.svg'
+import mySql from './mysql.svg'
+import msSql from './microsoft-sql-server.svg'
 
 export {
     css,
@@ -28,4 +33,5 @@ export {
     linkedin,
     twitter,
     contact,
+    java, springBoot, oracleSql, mySql, msSql
 }
