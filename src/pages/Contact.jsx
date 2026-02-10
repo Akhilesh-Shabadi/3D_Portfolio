@@ -30,6 +30,9 @@ const Contact = () => {
         setCurrentAnimation('hit');
         showAlert({ show: true, text: 'Sending Message...', type: 'info' });
 
+        console.log(" service ID ", import.meta.env.VITE_APP_EMAILJS_SERVICE_ID);
+        console.log(" template ID ", import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID);
+        console.log(" public key ", import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY);
         emailjs.send(
             import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
             import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
