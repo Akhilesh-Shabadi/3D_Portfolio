@@ -53,8 +53,9 @@ const Contact = () => {
                 }, 2000);
             })
             .catch((error) => {
+                console.log(error);
                 setIsLoading(false);
-                showAlert({ show: true, text: 'Failed to send message. Please try again.', type: 'error' });
+                showAlert({ show: true, text: 'Failed to send message. Please try again.', type: 'danger' });
             });
 
 
