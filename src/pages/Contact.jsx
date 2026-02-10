@@ -30,9 +30,6 @@ const Contact = () => {
         setCurrentAnimation('hit');
         showAlert({ show: true, text: 'Sending Message...', type: 'info' });
 
-        console.log(" service ID ", import.meta.env.VITE_APP_EMAILJS_SERVICE_ID);
-        console.log(" template ID ", import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID);
-        console.log(" public key ", import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY);
         emailjs.send(
             import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
             import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
@@ -53,16 +50,15 @@ const Contact = () => {
                     hideAlert();
                     setCurrentAnimation('idle');
                     setForm({ form_name: '', form_email: '', form_message: '' });
-                }, 2000);
+                }, 2500);
             })
             .catch((error) => {
-                console.log(error);
                 setIsLoading(false);
                 showAlert({ show: true, text: 'Failed to send message. Please try again.', type: 'danger' });
                 setTimeout(() => {
                     hideAlert();
                     setCurrentAnimation('idle');
-                }, 2000);
+                }, 2500);
             });
 
 
