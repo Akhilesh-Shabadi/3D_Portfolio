@@ -1,9 +1,10 @@
-import React, { Suspense, useRef, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
 import Fox from '../models/Fox';
 import useAlert from '../hooks/useAlert';
 import Alert from '../components/Alert';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
     const formRef = useRef();
@@ -28,17 +29,46 @@ const Contact = () => {
         setIsLoading(true);
         setCurrentAnimation('hit');
         showAlert({ show: true, text: 'Sending Message...', type: 'info' });
-        // Mock submission
-        setTimeout(() => {
-            setIsLoading(false);
-            showAlert({ show: true, text: 'Message sent successfully!', type: 'success' });
 
-            setTimeout(() => {
-                hideAlert();
-                setCurrentAnimation('idle');
-                setForm({ form_name: '', form_email: '', form_message: '' });
-            }, 3000);
-        }, 3000);
+        emailjs.send(
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+            {
+                from_name: form.form_name,
+                to_name: 'Akhilesh Shabadi',
+                from_email: form.form_email,
+                to_email: 'akhileshshabadi@gmail.com',
+                message: form.form_message,
+            },
+            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        )
+            .then((response) => {
+                setIsLoading(false);
+                showAlert({ show: true, text: 'Message sent successfully!', type: 'success' });
+
+                setTimeout(() => {
+                    hideAlert();
+                    setCurrentAnimation('idle');
+                    setForm({ form_name: '', form_email: '', form_message: '' });
+                }, 2000);
+            })
+            .catch((error) => {
+                setIsLoading(false);
+                showAlert({ show: true, text: 'Failed to send message. Please try again.', type: 'error' });
+            });
+
+
+        // // Mock submission
+        // setTimeout(() => {
+        //     setIsLoading(false);
+        //     showAlert({ show: true, text: 'Message sent successfully!', type: 'success' });
+
+        //     setTimeout(() => {
+        //         hideAlert();
+        //         setCurrentAnimation('idle');
+        //         setForm({ form_name: '', form_email: '', form_message: '' });
+        //     }, 3000);
+        // }, 3000);
     };
 
     return (
